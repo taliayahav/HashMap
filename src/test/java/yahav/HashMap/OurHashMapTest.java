@@ -1,6 +1,10 @@
 package yahav.HashMap;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collection;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -99,16 +103,69 @@ class OurHashMapTest {
         assertEquals(true, map.containsKey("ENGLISH1"));
         assertTrue(map.containsKey("ENGLISH1"));
     }
+    @Test
+    void checkContainsValue() {
+        // given
+        OurHashMap<String, String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+
+        //then
+        assertEquals(true, map.containsValue("HELLO"));
+    }
+    @Test
+    void removeMap() {
+        // given
+        OurHashMap<String, String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+        map.put("SPANISH", "HOLA");
+        map.remove("ENGLISH1", "HELLO");
+
+        //then
+        assertEquals(false, map.containsKey("ENGLISH1"));
+    }
 //    @Test
-//    void checkContainsValue() {
+//    void clearAll() {
 //        // given
-//        OurHashMap<String,String> map = new OurHashMap<>();
+//        OurHashMap<String, String> map = new OurHashMap<>();
 //
 //        //when
 //        map.put("ENGLISH1", "HELLO");
+//        map.put("SPANISH", "HOLA");
+//        map.clear();
 //
 //        //then
-//        assertEquals(true, map.containsValue("HELLO"));
-//        assertTrue(map.containsValue("HELLO"));
+//        assertEquals(true, map.isEmpty());
 //    }
+    @Test
+    void returnKeys() {
+        // given
+        OurHashMap<String, String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+        map.put("SPANISH", "HOLA");
+        Set keySet = map.keySet();
+
+        //then
+        assertTrue(keySet.contains("ENGLISH1"));
+        assertTrue(keySet.contains("SPANISH"));
+    }
+    @Test
+    void returnValues() {
+        //given
+        OurHashMap<String, String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+        map.put("SPANISH", "HOLA");
+        Collection values = map.values();
+
+        //then
+        assertTrue(values.contains("HELLO"));
+        assertTrue(values.contains("HOLA"));
+    }
 }

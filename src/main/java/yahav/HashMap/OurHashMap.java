@@ -56,9 +56,11 @@ public class OurHashMap<K,V> implements Map<K,V> {
     @Override
     public boolean containsValue(Object value) {
         for (List<Entry> list : values){
-            for(Entry entry: list){
-                if (entry.value.equals(value)){
-                    return true;
+            if (list != null) {
+                for(Entry entry: list){
+                    if (entry.value.equals(value)){
+                        return true;
+                    }
                 }
             }
         }
@@ -107,30 +109,60 @@ public class OurHashMap<K,V> implements Map<K,V> {
     //given the key removes the key and value
     @Override
     public V remove(Object key) {
+        int hashcode = key.hashCode();
+        int index = Math.abs(hashcode) % SIZE;
+        List<Entry> list = values[index];
+        if (list != null)
+            for (Entry entry : list) {
+                    if (entry.key == key) {
+                        V value = (V) entry.value;
+                        list.remove(entry);
+                        return value;
+                    }
+            }
         return null;
     }
 
     //given Map m go through this map and put them all in a second map.
     @Override
     public void putAll(Map m) {
-
     }
 
     //remove all keys and values
     @Override
     public void clear() {
-
+        for(List<Entry> list : values){
+            if(list != null){
+                list.clear();
+            }
+        }
     }
 
     @Override
     public Set keySet() {
-        return null;
+        Set<K> keySet = new HashSet<>();
+        for(List<Entry> list : values){
+            if(list != null){
+                for(Entry entry : list) {
+                    keySet.add((K)entry.key);
+                }
+            }
+        }
+        return keySet;
     }
 
     //print all values in the map
     @Override
     public Collection values() {
-        return null;
+        Collection<V> valueCollection = new HashSet<>();
+        for(List<Entry> list : values) {
+            if (list != null) {
+                for (Entry entry : list) {
+                    valueCollection.add((V) entry.value);
+                }
+            }
+        }
+        return valueCollection;
     }
 
     @Override
