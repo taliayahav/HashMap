@@ -1,12 +1,13 @@
 package yahav.HashMap;
 import java.sql.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class OurHashMap<K,V> implements Map<K,V> {
 
     private final int SIZE = 16;
 
-    class Entry<K,V> {
+    class Entry<K,V> { //Object with key and value defining features
         K key;
         V value;
 
@@ -16,26 +17,51 @@ public class OurHashMap<K,V> implements Map<K,V> {
         }
     }
 
-    List<Entry> values[] = new List[SIZE];
+    List<Entry> values[] = new List[SIZE]; //values is list of objects
 
     //returns # of key-values
     @Override
     public int size() {
-        return 0;
+        int size = 0;
+        for(List<Entry> list : values){
+            if (list != null) {
+                size += list.size();
+            }
+        }
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        for (List<Entry> list : values) {
+            if(list != null){
+                return false;
+            }
+        }
+        return true;
     }
-
     @Override
     public boolean containsKey(Object key) {
+        int hashcode = key.hashCode();
+        int index = Math.abs(hashcode) % SIZE;
+        List list = values[index];
+        for (Entry<K,V> entry : (List<Entry<K,V>>) list){
+            if(entry.key.equals(key)){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean containsValue(Object value) {
+        for (List<Entry> list : values){
+            for(Entry entry: list){
+                if (entry.value.equals(value)){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -75,7 +101,6 @@ public class OurHashMap<K,V> implements Map<K,V> {
 
         Entry entry = new Entry(key,value);
         list.add(entry);
-
         return null;
     }
 

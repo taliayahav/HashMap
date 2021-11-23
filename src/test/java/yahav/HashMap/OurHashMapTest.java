@@ -60,4 +60,55 @@ class OurHashMapTest {
         // then
         assertEquals("HI", map.get("ENGLISH1"));
     }
+
+    @Test
+    void getSize() {
+        // given
+        OurHashMap<String,String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+        map.put("SPANISH", "HOLA");
+        map.put("HEBREW", "SHALOM");
+        map.put("FRENCH", "BONJOUR");
+
+        //then
+        assertEquals(4, map.size());
+    }
+    @Test
+    void checkMapIsEmpty() {
+        // given
+        OurHashMap<String,String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+
+        //then
+        assertEquals(false, map.isEmpty());
+        assertNotNull(map);
+    }
+    @Test
+    void checkContainsKey() {
+        // given
+        OurHashMap<String,String> map = new OurHashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+
+        //then
+        assertEquals(true, map.containsKey("ENGLISH1"));
+        assertTrue(map.containsKey("ENGLISH1"));
+    }
+//    @Test
+//    void checkContainsValue() {
+//        // given
+//        OurHashMap<String,String> map = new OurHashMap<>();
+//
+//        //when
+//        map.put("ENGLISH1", "HELLO");
+//
+//        //then
+//        assertEquals(true, map.containsValue("HELLO"));
+//        assertTrue(map.containsValue("HELLO"));
+//    }
 }
