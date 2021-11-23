@@ -125,11 +125,11 @@ public class OurHashMap<K,V> implements Map<K,V> {
 
     //given Map m go through this map and put them all in a second map.
     @Override
-    public void putAll(Map<? extends K, ? extends V> m) {
-            for (K key : m.keySet())
-            {
-                put(key, m.get(key));
-            }
+    public void putAll(Map m) {
+        Set<Map.Entry<K,V>> entrySet = m.entrySet();
+        for (Map.Entry<K,V> entry : entrySet) {
+            this.put(entry.getKey(), entry.getValue());
+        }
     }
 
     //remove all keys and values

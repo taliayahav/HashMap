@@ -136,7 +136,6 @@ class OurHashMapTest {
 //
 //        //when
 //        map.put("ENGLISH1", "HELLO");
-//        map.put("SPANISH", "HOLA");
 //        map.clear();
 //
 //        //then
@@ -170,19 +169,17 @@ class OurHashMapTest {
         assertTrue(values.contains("HELLO"));
         assertTrue(values.contains("HOLA"));
     }
-//    @Test
-//    void putValuesInNewMap() {
-//        //given
-//        OurHashMap<String, String> map = new OurHashMap<>();
-//        Map<String, String> m = new HashMap<>();
-//
-//        //when
-//        map.put("ENGLISH1", "HELLO");
-//        map.put("SPANISH", "HOLA");
-//        map.putAll(m);
-//
-//        //then
-//        assertTrue(map.containsKey("ENGLISH1"));
-//        assertTrue(map.containsKey("HOLA"));
-//    }
+    @Test
+    void putValuesInNewMap() {
+        //given
+        OurHashMap<String, String> map = new OurHashMap<>();
+        Map<String, String> m = new HashMap<>();
+
+        //when
+        map.put("ENGLISH1", "HELLO");
+        map.putAll(m);
+
+        //then
+        assertTrue(map.containsKey("ENGLISH1"));
+    }
 }
